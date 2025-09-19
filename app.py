@@ -6,7 +6,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 import sqlalchemy as sa
 
 # Подключаемся к БД (ЗАМЕНИТЕ 'your_password' на реальный пароль!)
-engine = sa.create_engine("postgresql://postgres:postgres@localhost:5432/eif_db")
+engine = sa.create_engine("postgresql://postgres:postgres@localhost:5432/test")
 sql_database = SQLDatabase(engine)
 
 # Настраиваем LLM через Settings
@@ -16,7 +16,7 @@ Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
 # Создаем "движок" запросов к SQL
 query_engine = NLSQLTableQueryEngine(
     sql_database=sql_database,
-    tables=["test"], 
+    tables=["employees"], 
 )
 
 # Задаем вопрос на естественном языке

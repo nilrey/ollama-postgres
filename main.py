@@ -15,7 +15,7 @@ def main():
     
     # Подключаемся к postgres
     db_start_time = time.time()
-    engine = sa.create_engine("postgresql://postgres:postgres@localhost:5432/eif_db")
+    engine = sa.create_engine("postgresql://postgres:postgres@localhost:5432/test")
     sql_database = SQLDatabase(engine)
     db_time = time.time() - db_start_time
     print(f"Подключение к БД: {db_time:.2f} сек")
@@ -31,7 +31,7 @@ def main():
     engine_start_time = time.time()
     query_engine = NLSQLTableQueryEngine(
         sql_database=sql_database,
-        tables=["test"], 
+        tables=["employees"], 
     )
     engine_time = time.time() - engine_start_time
     print(f"Создание движка: {engine_time:.2f} сек")

@@ -1,51 +1,58 @@
-CREATE SEQUENCE IF NOT EXISTS public.test_id_seq
+CREATE DATABASE test
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+CREATE SEQUENCE IF NOT EXISTS public.employees_id_seq
     INCREMENT 1
     START 1
     MINVALUE 1
     MAXVALUE 2147483647
     CACHE 1;
 
-CREATE TABLE IF NOT EXISTS public.test
+CREATE TABLE IF NOT EXISTS public.employees
 (
-    id integer NOT NULL DEFAULT nextval('test_id_seq'::regclass),
+    id integer NOT NULL DEFAULT nextval('employees_id_seq'::regclass),
     name text COLLATE pg_catalog."default" NOT NULL,
     "position" text COLLATE pg_catalog."default" NOT NULL,
     office text COLLATE pg_catalog."default" NOT NULL,
     age integer NOT NULL,
     start_date timestamp with time zone,
     salary integer NOT NULL
-)
+);
 
-ALTER SEQUENCE public.test_id_seq
-    OWNED BY public.test.id;
+ALTER SEQUENCE public.employees_id_seq
+    OWNED BY public.employees.id;
 
-ALTER SEQUENCE public.test_id_seq
+ALTER SEQUENCE public.employees_id_seq
     OWNER TO postgres;
 
 
  -- Добавление комментария к таблице на Русском
-COMMENT ON TABLE test IS 'Основная таблица фактов. Содержит информацию о всех сотрудниках организации.';
+COMMENT ON TABLE employees IS 'Основная таблица фактов. Содержит информацию о всех сотрудниках организации.';
 
-COMMENT ON COLUMN test.name IS        'Имя и фамилия сотрудника, указаны через пробел';
-COMMENT ON COLUMN test.position IS    'Должность сотрудника в компании';
-COMMENT ON COLUMN test.office IS      'В поле указывается называние города. Название города определяет местонахождении офиса. В каком городе находится офис, там и работает сотрудник. ';
-COMMENT ON COLUMN test.age IS         'Возраст сотрудника в компании. Всегда > 0. ';
-COMMENT ON COLUMN test.start_date IS  'Дата когда сотрудник начал работу в компании';
-COMMENT ON COLUMN test.salary IS      'Зарплата сотрудника за год. Всегда > 0. Указывается как число заработанных денег за год.';
+COMMENT ON COLUMN employees.name IS        'Имя и фамилия сотрудника, указаны через пробел';
+COMMENT ON COLUMN employees.position IS    'Должность сотрудника в компании';
+COMMENT ON COLUMN employees.office IS      'В поле указывается называние города. Название города определяет местонахождении офиса. В каком городе находится офис, там и работает сотрудник. ';
+COMMENT ON COLUMN employees.age IS         'Возраст сотрудника в компании. Всегда > 0. ';
+COMMENT ON COLUMN employees.start_date IS  'Дата когда сотрудник начал работу в компании';
+COMMENT ON COLUMN employees.salary IS      'Зарплата сотрудника за год. Всегда > 0. Указывается как число заработанных денег за год.';
 
 
  -- Добавление комментария к таблице English
-COMMENT ON TABLE test IS 'The main table of facts. It contains information about all employees of the organization.';
+COMMENT ON TABLE employees IS 'The main table of facts. It contains information about all employees of the organization.';
 
-COMMENT ON COLUMN test.name IS        'The employee first and last name are separated by a space';
-COMMENT ON COLUMN test.position IS    'Employee position in the company';
-COMMENT ON COLUMN test.office IS      'The name of the city is indicated in the field. The name of the city determines the location of the office. In which city the office is located, the employee works there. ';
-COMMENT ON COLUMN test.age IS         'The age of the employee in the company. Always > 0. ';
-COMMENT ON COLUMN test.start_date IS  'The date when the employee started working for the company';
-COMMENT ON COLUMN test.salary IS      'The employee salary for the year. Always > 0. It is indicated as the number of money earned per year.';
+COMMENT ON COLUMN employees.name IS        'The employee first and last name are separated by a space';
+COMMENT ON COLUMN employees.position IS    'Employee position in the company';
+COMMENT ON COLUMN employees.office IS      'The name of the city is indicated in the field. The name of the city determines the location of the office. In which city the office is located, the employee works there. ';
+COMMENT ON COLUMN employees.age IS         'The age of the employee in the company. Always > 0. ';
+COMMENT ON COLUMN employees.start_date IS  'The date when the employee started working for the company';
+COMMENT ON COLUMN employees.salary IS      'The employee salary for the year. Always > 0. It is indicated as the number of money earned per year.';
 
 
-INSERT INTO public.test (id, name, position, office, age, start_date, salary)
+INSERT INTO public.employees (name, position, office, age, start_date, salary)
 VALUES 
 	( 'Arsendo Aristos', 'Chief Accountant', 'London', 32, '2009-10-09', 1200000 ),
 	( 'Airi Satou', 'Accountant', 'Tokyo', 33, '2008-11-28', 162700 ),
